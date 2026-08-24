@@ -5,7 +5,7 @@
 ## makefile
 ##
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re help debug
 
 CC = gcc
 
@@ -67,3 +67,16 @@ fclean: clean
 		@echo "Binary removed"
 
 re:	fclean all
+
+help:
+	@echo "Available rules:"
+	@echo "	all	-> build the project"
+	@echo "	clean	-> remove object files"
+	@echo "	fclean	-> remove object files and binary"
+	@echo "	re	-> rebuild from scratch"
+	@echo "	help	-> show this message"
+	@echo "	debug	-> build with sanitizers"
+
+debug:	CFLAGS += -fsanitize=address,undefined
+debug:	LDFLAGS += -fsanitize=address,undefined
+debug:	re
