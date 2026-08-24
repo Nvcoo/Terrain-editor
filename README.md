@@ -36,3 +36,6 @@ The program will return '84' if something went wrong
 - Implementing isometric terrain rendering
 - CSFML coding
 - Events managements
+
+## License
+MIT
