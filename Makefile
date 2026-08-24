@@ -21,41 +21,49 @@ SRC =	./main.c \
 		./src/handling/handle_events.c \
 		./src/handling/handle_keys.c \
 		./src/handling/handle_mouse.c \
-		./src/textboxes/create_textboxes.c \
-		./src/textboxes/init_textbox.c \
-		./src/textboxes/update_textboxes.c \
-		./src/apply_tool.c \
-		./src/button_colors.c \
-		./src/cleanup_game.c \
-		./src/create_buttons.c \
-		./src/draw_map.c \
-		./src/get_altitude_color.c \
-		./src/handle_text_input.c \
-		./src/init_game.c \
-		./src/project_iso_point.c \
-		./src/recreate_map.c \
-		./src/render_ui.c \
-		./src/res_view.c \
-		./src/screen_to_tile.c \
-		./src/update_ui.c \
-		./src/utils.c \
-		./src/world_to_screen.c \
+		./src/handling/handle_text_input.c \
+		./src/ui/button_colors.c \
+		./src/ui/create_buttons.c \
+		./src/ui/render_ui.c \
+		./src/ui/res_view.c \
+		./src/ui/update_ui.c \
+		./src/ui/textboxes/create_textboxes.c \
+		./src/ui/textboxes/init_textbox.c \
+		./src/ui/textboxes/update_textboxes.c \
+		./src/map/draw_map.c \
+		./src/map/draw_textured_tiles.c \
+		./src/map/get_altitude_color.c \
+		./src/map/project_iso_point.c \
+		./src/map/screen_to_tile.c \
+		./src/map/world_to_screen.c \
+		./src/core/apply_tool.c \
+		./src/core/cleanup_game.c \
+		./src/core/init_game.c \
+		./src/core/recreate_map.c \
+		./src/utils/utils.c \
 		./src/save/save_map.c \
-		./src/draw_textured_tiles.c \
 
 OBJ = $(SRC:.c=.o)
 
-NAME = my_world
+NAME = world
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+		@echo "Compiled successfully!"
+		@echo "Binary: $(NAME)"
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "CC $<"
 
 clean:
-		rm -f $(OBJ)
+		@rm -f $(OBJ)
+		@echo "Object files removed"
 
 fclean: clean
-		rm -f $(NAME)
+		@rm -f $(NAME)
+		@echo "Binary removed"
 
 re:	fclean all
